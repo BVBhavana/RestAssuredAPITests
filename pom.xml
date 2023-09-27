@@ -1,0 +1,229 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>SerinityBDDAPIFramework</groupId>
+  <artifactId>Way2AutomationAPITests</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>Way2Automation-apis-qa-automation</name>
+	<description>way2Automation APIS QA Automation using Cucumber and Serenity</description>
+	<packaging>jar</packaging>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<serenity.version>2.1.1</serenity.version> <!-- https://bintray.com/serenity/maven/serenity-core/ -->
+		<serenity.maven.version>2.1.1</serenity.maven.version>
+		<serenity.cucumber.version>1.9.45</serenity.cucumber.version> <!-- https://bintray.com/serenity/maven/serenity-cucumber/ -->
+		<testclasses>**/TestRunner*.java</testclasses>
+		<parallel.forkCount>0</parallel.forkCount>
+		<parallel.threadCount>1</parallel.threadCount>
+	</properties>
+
+	<!-- Define the Bintray repos for convenience -->
+
+	<dependencies>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-core</artifactId>
+			<version>${serenity.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-junit</artifactId>
+			<version>${serenity.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>7.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<version>1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>5.8.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.aventstack</groupId>
+			<artifactId>extentreports</artifactId>
+			<version>4.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-rest-assured</artifactId>
+			<version>${serenity.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-cucumber</artifactId>
+			<version>${serenity.cucumber.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+			<version>1.8.6</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.5.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.lambdaj</groupId>
+			<artifactId>lambdaj</artifactId>
+			<version>2.3.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>1.7.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20190722</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>4.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>4.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.17.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.17.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.awaitility</groupId>
+			<artifactId>awaitility</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.javafaker</groupId>
+			<artifactId>javafaker</artifactId>
+			<version>0.15</version>
+		</dependency>
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>json-schema-validator</artifactId>
+			<version>4.3.1</version>
+		</dependency>
+		<dependency>
+            <groupId>com.ibm.mq</groupId>
+            <artifactId>com.ibm.mq.allclient</artifactId>
+            <version>9.1.0.5</version>
+        </dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.0</version>
+				<configuration>
+					<!-- skip the surefire tests as we have included the class files and 
+						config in failsafe plugin -->
+					<skip>true</skip>
+					<!-- <forkcount>5</forkcount> <reuseforks>true</reuseforks> -->
+					<!-- <parallel>classes</parallel> <threadCount>6</threadCount> -->
+					<!-- <parallel>classes</parallel> <threadCount>6</threadCount> -->
+					<!-- <testFailureIgnore>true</testFailureIgnore> -->
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.22.0</version>
+				<configuration>
+					<!-- Include the class.java file name during run time at command prompt 
+						as mentioned below clean verify -DEnv=${Env} -Dtestclasses="**/MCClient*.java" 
+						verify serenity:aggregate -->
+					<includes>
+						<include>${testclasses}</include>
+					</includes>
+					<forkCount>${parallel.forkCount}</forkCount>
+					<reuseForks>true</reuseForks>
+					<parallel>classes</parallel>
+					<threadCount>${parallel.threadCount}</threadCount>
+					<argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<!-- serenity-single-page-report and serenity-emailer is for single consolidated 
+				report.But use serenity-single-page-report -->
+			<!-- <plugin> <groupId>net.serenity-bdd.maven.plugins</groupId> <artifactId>serenity-maven-plugin</artifactId> 
+				<version>${serenity.maven.version}</version> <dependencies> <dependency> 
+				<groupId>net.serenity-bdd</groupId> <artifactId>serenity-emailer</artifactId> 
+				<version>${serenity.version}</version> </dependency> </dependencies> <configuration> 
+				<tags>${tags}</tags> <reports>email</reports> </configuration> <executions> 
+				<execution> <id>serenity-reports</id> <phase>post-integration-test</phase> 
+				<goals> <goal>aggregate</goal> </goals> </execution> </executions> </plugin> -->
+			<plugin>
+				<groupId>net.serenity-bdd.maven.plugins</groupId>
+				<artifactId>serenity-maven-plugin</artifactId>
+				<version>${serenity.version}</version>
+				<dependencies>
+					<dependency>
+						<groupId>net.serenity-bdd</groupId>
+						<artifactId>serenity-single-page-report</artifactId>
+						<version>2.1.7</version>
+					</dependency>
+					<dependency>
+						<groupId>net.serenity-bdd</groupId>
+						<artifactId>serenity-navigator-report</artifactId>
+						<version>2.3.7</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<tags>${tags}</tags>
+					<reports>single-page-html,navigator</reports>
+				</configuration>
+				<executions>
+					<execution>
+						<id>serenity-reports</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>aggregate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

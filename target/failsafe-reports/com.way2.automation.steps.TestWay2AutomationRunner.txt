@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.way2.automation.steps.TestWay2AutomationRunner
+-------------------------------------------------------------------------------
+Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 17.966 s - in com.way2.automation.steps.TestWay2AutomationRunner
